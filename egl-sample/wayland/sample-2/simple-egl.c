@@ -20,6 +20,7 @@ struct window {
   EGLContext egl_context;
   struct wl_surface *surface;
   struct wl_shell_surface *shell_surface;
+  struct wl_subsurface *sub_surface;
   struct wl_egl_window *egl_window;
   EGLSurface egl_surface;
 };
@@ -29,6 +30,8 @@ static void registry_add_object (void *data, struct wl_registry *registry,
                     uint32_t name, const char *interface,  uint32_t version) {
   if (!strcmp(interface,"wl_compositor")) {
     compositor = wl_registry_bind (registry, name, &wl_compositor_interface, 1);
+  } else if (!strcmp(interface,"wl_shell")) {
+    shell = wl_registry_bind (registry, name, &wl_shell_interface, 1);
   } else if (!strcmp(interface,"wl_shell")) {
     shell = wl_registry_bind (registry, name, &wl_shell_interface, 1);
   }
