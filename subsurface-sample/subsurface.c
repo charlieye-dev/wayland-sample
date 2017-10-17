@@ -235,6 +235,7 @@ void create_sub_surface(struct window *window) {
   window->sub_surface = wl_compositor_create_surface(compositor);
 
   window->egl_window = wl_egl_window_create (window->sub_surface, 160, 160);
+  /*Create render region in wayland window.*/
   window->egl_surface = eglCreateWindowSurface (window->display->egl_display, config, window->egl_window, NULL);
   eglMakeCurrent (window->display->egl_display, window->egl_surface, window->egl_surface, window->display->egl_context);
 }
